@@ -1,0 +1,12 @@
+{
+  "name": "vebs",
+  "version": "0.0.1",
+  "description": "verbose: a way to provide descriptive log in development for something that should be used carefully.",
+  "main": "verbose.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
