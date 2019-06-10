@@ -11,9 +11,9 @@
  * The verbose will not use in production mode.
  */
 
-const isprod = process.env.NODE_ENV !== 'production';
+var isprod = process.env.NODE_ENV !== 'production';
 
-const verbose = function(condition, config, a, b, c) {
+var verbose = function(condition, config) {
   let format, level, prefix;
 
   if (isprod) return;
@@ -32,11 +32,11 @@ const verbose = function(condition, config, a, b, c) {
   if (condition) {
     // assert
     // eslint-disable-next-line no-unused-vars
-    const [_1, _2, ...rest] = arguments;
+    var [_1, _2, ...rest] = arguments;
 
     let index = 0,
       info;
-    const formatted = format.replace(/%s/g, function() {
+    var formatted = format.replace(/%s/g, function() {
       return rest[index++];
     });
     info = prefix ? `${prefix} ${formatted}` : formatted;
