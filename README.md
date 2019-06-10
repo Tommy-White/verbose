@@ -13,7 +13,7 @@ const verbose = require('vebs');
 verbose(truely, 'You may have used it wrong.');
 // ⚠️ >: 1 You may have used it wrong.
 
-invariant(Falsey, 'This will not log');
+verbose(Falsey, 'This will not log');
 // nothing happened
 ```
 
