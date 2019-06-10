@@ -56,4 +56,4 @@ const verbose = function(condition, config, a, b, c) {
   }
 };
 
-export default verbose;
+module.exports = verbose;
