@@ -11,7 +11,7 @@
  * The verbose will not use in production mode.
  */
 
-var isprod = process.env.NODE_ENV !== 'production';
+var isprod = process.env.NODE_ENV === 'production';
 
 var verbose = function(condition, config) {
   let format, level, prefix;
