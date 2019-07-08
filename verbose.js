@@ -11,12 +11,13 @@
  * The verbose will not use in production mode.
  */
 
-var isprod = process.env.NODE_ENV === 'production';
+/* eslint-disable */
+var __PROD__ = process.env.NODE_ENV === 'production';
 
 var verbose = function(condition, config) {
-  let format, level, prefix;
+  if (__PROD__) return;
 
-  if (isprod) return;
+  var format, level, prefix;
 
   if (config === undefined) {
     throw new Error('verbose requires an error message argument');
@@ -29,12 +30,10 @@ var verbose = function(condition, config) {
     prefix = config.prefix;
   }
 
-  if (condition) {
-    // assert
-    // eslint-disable-next-line no-unused-vars
-    var [_1, _2, ...rest] = arguments;
+  if (!condition) {
+    var rest = Array.prototype.slice.call(arguments, 2);
 
-    let index = 0,
+    var index = 0,
       info;
     var formatted = format.replace(/%s/g, function() {
       return rest[index++];
