@@ -3,6 +3,11 @@
   "version": "2.0.0",
   "description": "verbose: a way to provide descriptive log in development for something that should be used carefully.",
   "main": "verbose.js",
+  "types": "verbose.d.ts",
+  "files": [
+    "verbose.js",
+    "verbose.d.ts"
+  ],
   "scripts": {
     "test": "npm run test:dev && npm run test:prod",
     "test:dev": "cross-env NODE_ENV=development jest --testPathPattern development.js",

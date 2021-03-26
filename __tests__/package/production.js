@@ -1,11 +1,11 @@
-test('verbose in production env', () => {
-  var verbose = require('../../');
+test("verbose in production env", () => {
+  var verbose = require("../../");
 
-  expect(function() {
+  expect(function () {
     verbose(true);
   }).not.toThrow();
 
-  expect(function() {
+  expect(function () {
     verbose(false);
   }).not.toThrow();
 });

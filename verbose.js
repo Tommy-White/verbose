@@ -1,58 +1,48 @@
 /**
  *
- * Same as invariant but use console instead of Error.
+ * Same as invariant but also can use printf.
  *
  * Use verbose() to report practical info which your program assumed.
  *
- * Provide sprintf-style format (only %s is supported) and arguments
- * to provide information about what broke and what you were
- * expecting.
+ * The `verbose` provide a printf-style(only %s is supported) liked API
+ * to throw or log a message.
  *
  * The verbose will not use in production mode.
  */
 
-/* eslint-disable */
-var __PROD__ = process.env.NODE_ENV === 'production';
+const __PROD__ = process.env.NODE_ENV === "production";
 
-var verbose = function(condition, config) {
-  if (__PROD__) return;
+const format = (msgTemp, iterable) => {
+  const iterator = iterable[Symbol.iterator]();
 
-  var format, level, prefix;
+  return msgTemp.replace(/%s/g, () => iterator.next().value);
+};
 
-  if (config === undefined) {
-    throw new Error('verbose requires an error message argument');
+function verbose(condition, config) {
+  if (__PROD__ || condition) return;
+
+  if (typeof config === "string") {
+    config = {
+      level: "throw",
+      message: config
+    };
   }
-  if (typeof config === 'string') {
-    format = config;
-  } else {
-    format = config.format;
-    level = config.level;
-    prefix = config.prefix;
-  }
 
-  if (!condition) {
-    var rest = Array.prototype.slice.call(arguments, 2);
+  const restArgs = Array.prototype.slice.call(arguments, 2);
+  const message =
+    restArgs.length == 0 ? config.message : format(config.message, restArgs);
 
-    var index = 0,
-      info;
-    var formatted = format.replace(/%s/g, function() {
-      return rest[index++];
-    });
-    info = prefix ? `${prefix} ${formatted}` : formatted;
-
-    // minify consoloe scope
-    switch (level) {
-      case 'error':
-      case 'warn':
-      case 'log': {
-        console[level](info);
-        break;
-      }
-      default: {
-        console.warn(info);
-      }
+  switch (config.level) {
+    case "error":
+    case "warn":
+    case "log": {
+      console[config.level](message);
+      break;
+    }
+    default: {
+      throw new Error(message);
     }
   }
-};
+}
 
 module.exports = verbose;
