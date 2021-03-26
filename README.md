@@ -2,20 +2,25 @@
 
 A fork of Facebook's invariant.
 
-A way to provide descriptive log in development for something that should be used carefully.
+The `verbose` provide a printf-style(only %s is supported) liked API to throw or log a message.
 
 ## verbose(condition, message)
 
 ```js
-const verbose = require('vebs');
+import verbose from "vebs";
 
-// API.call() => truly | falsely
-
-verbose(truly, 'This will not log');
+verbose(true, "This will not log");
 // nothing happened
 
-verbose(falsely, 'You may have used it wrong.');
-// ⚠️ >: 1 You may have used it wrong.
+verbose(false, "Error message");
+// Uncaught Error: Error message ...
+
+verbose(
+  false,
+  { level: "log", message: "You may have wrong way using [%s]." },
+  "vebs"
+);
+// console.log("You may have wrong way using [vebs].")
 ```
 
 **Note:**
