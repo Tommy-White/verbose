@@ -1,6 +1,6 @@
 {
   "name": "vebs",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "verbose: a way to provide descriptive log in development for something that should be used carefully.",
   "main": "verbose.js",
   "types": "verbose.d.ts",
